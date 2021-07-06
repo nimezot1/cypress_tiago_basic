@@ -29,7 +29,9 @@ describe("tickets", () => {
     });
     
 
-    it("has 'TICKET' header's heading", () => {});
+    it.only("Verificando titulo", () => {
+        cy.get("header h1").should("contain", "TICKETBOX");
+    });
 
     //beforeEach(() => cy.visit("https://www.drogasil.com.br/"));
     //it("has 'Farmacia online 24 horas Drogasil' header's heading", () => {});

@@ -1,0 +1,20 @@
+{
+  "name": "cypress_tiago",
+  "version": "1.0.0",
+  "description": "curso_cypress_basico",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "keywords": [
+    "cypress",
+    "test",
+    "automation",
+    "e2e"
+  ],
+  "author": "Tiago Ferreira",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^7.6.0"
+  }
+}

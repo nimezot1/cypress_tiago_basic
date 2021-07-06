@@ -1,0 +1,4 @@
+.DS_Store
+cypress/sceenshots/
+cypress/videos/
+node_modules/

@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+//const cypress = require("cypress")
+
+Cypress.Commands.add("testeFields", dados => {
+    cy.get("#first-name").type(dados.primeiroNome);
+    cy.get("#last-name").type(dados.ultimoNome);
+    cy.get("#email").type(dados.email);
+    cy.get("#agree").check(); 
+});

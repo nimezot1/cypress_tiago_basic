@@ -1,6 +1,12 @@
 describe("tickets", () => {
     beforeEach(() => cy.visit("https://ticketbox-backstopjs-tat.s3.eu-central-1.amazonaws.com/index.html"));
     
+    const usuario = {
+        primeiroNome: "Jose",
+        ultimoNome:   "João",
+        email:        "josejoao@teste.com.br",
+    };
+
     const titulo = "TICKETBOX";
     const primeiro_Nome = "Tiago";
     const ultimo_Nome = "Ferreira";
@@ -219,6 +225,20 @@ describe("tickets", () => {
         cy.get("#agree")
           .should('be.empty');
     });
+
+    it("Validando Comandos", () => {
+
+        cy.testeFields(usuario);
+
+        cy.get("button[type='submit']")
+          .as("botaoEnviar")
+          .should("not.be.disabled");
+
+        cy.get("button[type='reset']").click();
+
+        cy.get("@botaoEnviar").should("be.disabled");
+    });
+
     //beforeEach(() => cy.visit("https://www.drogasil.com.br/"));
     //it("has 'Farmacia online 24 horas Drogasil' header's heading", () => {});
 });

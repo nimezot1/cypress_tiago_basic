@@ -10,7 +10,7 @@ describe("tickets", () => {
     const frase = "é nóix mano";
     const assinatura = "O Profeta";
 
-    it("Preenchendo os input fields", () => {
+    it("Validando preenchimento os input fields", () => {
         cy.get("#first-name")
           .type(primeiro_Nome);
         
@@ -58,7 +58,7 @@ describe("tickets", () => {
           .type(assinatura);
     });
 
-    it.only("Validando select, radio e texto", () => {
+    it("Validando select, radio e texto", () => {
         cy.get("#first-name")
           .type(primeiro_Nome);
 
@@ -116,12 +116,12 @@ describe("tickets", () => {
         
     });
 
-    it("Verificando titulo", () => {
+    it("Validando titulo", () => {
         cy.get("header h1")
           .should("contain", titulo);
     });
 
-    it("Validar email invalido", () => {
+    it("Validando email invalido", () => {
         cy.get("#email")
           .as("email")
           .type(emailInvalido);
@@ -137,9 +137,87 @@ describe("tickets", () => {
           .should("not.exist");
     });
 
-    it("Preencher o formulário e resetar", () => {
-        cy.get("@e_primeiro_Nome")
+    it ("Validando campos obrigatórios e botão reset", () => {
+        //validação dos campos obrigatórios
+        cy.get("button[type='submit']")
+          .as("botaoEnviar")
+          .should("be.disabled");
+
+        cy.get("#first-name")
           .type(primeiro_Nome);
+        cy.get("@botaoEnviar")
+          .should("be.disabled");
+
+        cy.get("#last-name")
+          .type(ultimo_Nome);
+        cy.get("@botaoEnviar")
+          .should("be.disabled");
+          
+        cy.get("#email")
+          .type(email);
+        cy.get("@botaoEnviar")
+          .should("be.disabled");
+
+        cy.get("#friend")
+          .check();
+        cy.get("@botaoEnviar")
+          .should("be.disabled");
+
+        cy.get("#publication")
+          .check();
+        cy.get("@botaoEnviar")
+          .should("be.disabled");
+
+        cy.get("#social-media")
+          .check();
+        cy.get("@botaoEnviar")
+          .should("be.disabled");
+          
+        cy.get("#requests")
+          .type(frase);
+        cy.get("@botaoEnviar")
+          .should("be.disabled");
+
+        cy.get("#signature")
+          .type(assinatura);
+        cy.get("@botaoEnviar")
+          .should("be.disabled");
+
+        cy.get("#agree")
+          .check();
+        cy.get("@botaoEnviar")
+          .should("not.be.disabled");
+        
+        //validação do botão reset
+        cy.get("button[type='reset']")
+          .click();
+
+        cy.get("#first-name")
+          .should('be.empty');
+
+        cy.get("#last-name")
+          .should('be.empty');
+
+        cy.get("#email")
+          .should('be.empty');
+
+        cy.get("#friend")
+          .should('be.empty');
+          
+        cy.get("#publication")
+          .should('be.empty');
+
+        cy.get("#social-media")
+          .should('be.empty');
+
+        cy.get("#requests")
+          .should('be.empty');
+
+        cy.get("#signature")
+          .should('be.empty');
+
+        cy.get("#agree")
+          .should('be.empty');
     });
     //beforeEach(() => cy.visit("https://www.drogasil.com.br/"));
     //it("has 'Farmacia online 24 horas Drogasil' header's heading", () => {});
